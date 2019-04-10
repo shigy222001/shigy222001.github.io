@@ -6,33 +6,66 @@
   <title>Push Notification</title>
 </head>
 <body>
-  </script>
-  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-  <script>
-  var messaging = firebase.initializeApp({
-    apiKey: "AIzaSyAG18XNPznG4EOvRN5cu88_ZHKPmcLPtCM",
-    authDomain: "pwatest-19462.firebaseapp.com",
-    databaseURL: "https://pwatest-19462.firebaseio.com",
-    projectId: "pwatest-19462",
-    storageBucket: "pwatest-19462.appspot.com",
-    messagingSenderId: "552683654416"
-  }).messaging();
+</script>
+<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script>
+var messaging = firebase.initializeApp({
+  apiKey: "AIzaSyAG18XNPznG4EOvRN5cu88_ZHKPmcLPtCM",
+  authDomain: "pwatest-19462.firebaseapp.com",
+  databaseURL: "https://pwatest-19462.firebaseio.com",
+  projectId: "pwatest-19462",
+  storageBucket: "pwatest-19462.appspot.com",
+  messagingSenderId: "552683654416"
+}).messaging();
 
-  var serviceWorker = navigator.serviceWorker;
+var serviceWorker = navigator.serviceWorker;
 
-  messaging.requestPermission();
+messaging.requestPermission();
 
-  serviceWorker.register('serviceworker.js').then(() => {
-    return serviceWorker.ready;
-  }).then(regist => {
-    messaging.useServiceWorker(regist);
-    messaging.requestPermission().then(() => {
-      messaging.getToken().then(token => {
-        document.write(token+ "<BR>");
-        console.log(token);
-      });
+serviceWorker.register('serviceworker.js').then(() => {
+  return serviceWorker.ready;
+}).then(regist => {
+  messaging.useServiceWorker(regist);
+  messaging.requestPermission().then(() => {
+    messaging.getToken().then(token => {
+      document.write("Push通知用Token" + "<BR>");
+      document.write(token+ "<BR>");
+      console.log(token);
     });
   });
+});
 </script>
+
+<!-- 撮影 -->
+<video id="player" controls autoplay />
+<button id="capture">撮影</button>
+<canvas id="snapshot" width="320" height="240" />
+<script>
+  var player = document.getElementById('player');
+  var snapshotCanvas = document.getElementById('snapshot');
+  var captureButton = document.getElementById('capture');
+  var videoTracks;
+
+  var handleSuccess = function(stream) {
+    // Attach the video stream to the video element and autoplay.
+    player.srcObject = stream;
+    videoTracks = stream.getVideoTracks();
+  };
+
+  captureButton.addEventListener('click', function() {
+    var context = snapshot.getContext('2d');
+    // Draw the video frame to the canvas.
+    context.drawImage(player, 0, 0, snapshotCanvas.width,
+        snapshotCanvas.height);
+
+    // Stop all video streams.
+    videoTracks.forEach(function(track) }track.stop()});
+  });
+
+  navigator.mediaDevices.getUserMedia({video: true})
+      .then(handleSuccess);
+</script>
+<input type="button" value="撮影" onclick="OnCaptureButtonClick();"/>
+<br/>
 </body>
 </html>
