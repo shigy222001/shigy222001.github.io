@@ -37,15 +37,15 @@
     messaging.requestPermission().then(() => {
       messaging.getToken().then(token => {
         console.log(token);
-        setGlobalToken(token);
+        globalToken = token;
       });
     });
   });
 </script>
 
 <script>
-document.write(getGlobalToken() + "<BR>");
-console.log(getGlobalToken());
+document.write(globalToken + "<BR>");
+console.log(globalToken);
 </script>
 </body>
 </html>
