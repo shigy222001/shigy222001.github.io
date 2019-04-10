@@ -1,29 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <link rel="manifest" href="manifest.json">
-  <title>Push Notification</title>
+  <title>静止画撮影</title>
 </head>
 <body>
-<script>
-var serviceWorker = navigator.serviceWorker;
-
-messaging.requestPermission();
-
-serviceWorker.register('serviceworker.js').then(() => {
-  return serviceWorker.ready;
-}).then(regist => {
-  messaging.useServiceWorker(regist);
-  messaging.requestPermission().then(() => {
-    messaging.getToken().then(token => {
-      console.log(token);
-    });
-  });
-});
-</script>
-
-<!-- 撮影 -->
 <video id="player" controls autoplay />
 <button id="capture">撮影</button>
 <canvas id="snapshot" width="320" height="240" />
