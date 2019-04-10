@@ -20,9 +20,10 @@
   };
 
   captureButton.addEventListener('click', function() {
+    player.visibility ="hidden";
     var context = snapshot.getContext('2d');
     // Draw the video frame to the canvas.
-    context.drawImage(player, 100, 100, snapshotCanvas.width,
+    context.drawImage(player, 0, 0, snapshotCanvas.width,
         snapshotCanvas.height);
 
     // Stop all video streams.
