@@ -20,9 +20,6 @@
     var videoTracks;
     var imageCapture;
 
-    var handleSuccess = function(stream) {
-    };
-
     captureButton.addEventListener('click', function() {
       imageCapture.grabFrame()
       .then(imageBitmap => {
