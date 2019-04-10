@@ -4,10 +4,15 @@
   <title>静止画撮影</title>
 </head>
 <body>
+<div>
 <button id="capture">Capture</button>
-<br/>
+</div>
+<div>
+  <video id="player" controls autoplay />
+  </div>
+  <div>
 <canvas id="snapshot" width="320" height="240" />
-<video id="player" controls autoplay />
+</div>
 <script>
   var player = document.getElementById('player');
   var snapshotCanvas = document.getElementById('snapshot');
