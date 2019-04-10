@@ -6,6 +6,15 @@
 <title>Push Notification</title>
 </head>
 <body>
+  <script>
+  var globalToken
+  function setGlobalToken(token) {
+    globalToken = token;
+  }
+  funcion getGlobalToken() {
+    return (globalToken);
+  }
+  </script>
 <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
 <script>
 var messaging = firebase.initializeApp({
@@ -28,9 +37,13 @@ serviceWorker.register('serviceworker.js').then(() => {
     messaging.requestPermission().then(() => {
         messaging.getToken().then(token => {
             console.log(token);
+            setGlobalToken(token);
         });
     });
 });
 </script>
+
+<script>
+document.write(getGlobalToken() + "<BR>");
 </body>
 </html>
