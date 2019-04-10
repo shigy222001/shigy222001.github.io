@@ -42,8 +42,7 @@
       player.srcObject = mediaStream;
       videoTracks = mediaStream.getVideoTracks();
       imageCapture = new ImageCapture(videoTracks);
-    })
-    .catch(error => ChromeSamples.log(error));
+    });
 
   function drawCanvas(canvas, img) {
     canvas.width = getComputedStyle(canvas).width.split('px')[0];
