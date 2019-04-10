@@ -1,48 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <!-- manifest.jsonを呼び出しています -->
-  <link rel="manifest" href="./manifest.json">
-  <script>
-  // service workerが有効なら、service-worker.js を登録します
-  window.addEventListener('load', function() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register("./service-worker.js")
-      .then(function(registration) {
-        return registration.pushManager.getSubscription().then(function(subscription) {
-          if (subscription) {
-            return subscription
-          }
-          return registration.pushManager.subscribe({
-            userVisibleOnly: true
-          })
-        })
-      }).then(function(subscription) {
-        console.log("pushManager endpoint:", subscription.endpoint)
-      }).catch(function(error) {
-        console.warn("serviceWorker error:", error)
-      })
-    }
-  });
-  </script>
-
-  <title>Hello PWA.</title>
-  <style>
-  body {
-    text-align:center;
-    font-size: 40px;
-    vertical-align: middle;
-  }
-  .image {
-    width: 80%;
-    margin: auto;
-    display: block;
-  }
-  </style>
+<meta charset="UTF-8">
+<link rel="manifest" href="manifest.json">
+<title>Push Notification</title>
 </head>
 <body>
-  <h1>Hello PWA.</h1>
-  <img src="./pwa-logo.svg" alt="PWA logo" class="image" />
-  <a href="p.html">p.html</a>
+<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script>
+var messaging = firebase.initializeApp({
+  apiKey: "AIzaSyAG18XNPznG4EOvRN5cu88_ZHKPmcLPtCM",
+  authDomain: "pwatest-19462.firebaseapp.com",
+  databaseURL: "https://pwatest-19462.firebaseio.com",
+  projectId: "pwatest-19462",
+  storageBucket: "pwatest-19462.appspot.com",
+  messagingSenderId: "552683654416"
+}).messaging();
+
+var serviceWorker = navigator.serviceWorker;
+
+messaging.requestPermission();
+
+serviceWorker.register('serviceworker.js').then(() => {
+    return serviceWorker.ready;
+}).then(regist => {
+    messaging.useServiceWorker(regist);
+    messaging.requestPermission().then(() => {
+        messaging.getToken().then(token => {
+            console.log(token);
+        });
+    });
+});
+</script>
 </body>
 </html>
