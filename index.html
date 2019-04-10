@@ -36,6 +36,7 @@
     messaging.useServiceWorker(regist);
     messaging.requestPermission().then(() => {
       messaging.getToken().then(token => {
+        document.write(token+ "<BR>");
         console.log(token);
         globalToken = token;
       });
