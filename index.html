@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<link rel="manifest" href="manifest.json">
-<title>Push Notification</title>
+  <meta charset="UTF-8">
+  <link rel="manifest" href="manifest.json">
+  <title>Push Notification</title>
 </head>
 <body>
   <script>
-  var globalToken
+  var globalToken;
   function setGlobalToken(token) {
     globalToken = token;
   }
@@ -15,36 +15,37 @@
     return (globalToken);
   }
   </script>
-<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-<script>
-var messaging = firebase.initializeApp({
-  apiKey: "AIzaSyAG18XNPznG4EOvRN5cu88_ZHKPmcLPtCM",
-  authDomain: "pwatest-19462.firebaseapp.com",
-  databaseURL: "https://pwatest-19462.firebaseio.com",
-  projectId: "pwatest-19462",
-  storageBucket: "pwatest-19462.appspot.com",
-  messagingSenderId: "552683654416"
-}).messaging();
+  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+  <script>
+  var messaging = firebase.initializeApp({
+    apiKey: "AIzaSyAG18XNPznG4EOvRN5cu88_ZHKPmcLPtCM",
+    authDomain: "pwatest-19462.firebaseapp.com",
+    databaseURL: "https://pwatest-19462.firebaseio.com",
+    projectId: "pwatest-19462",
+    storageBucket: "pwatest-19462.appspot.com",
+    messagingSenderId: "552683654416"
+  }).messaging();
 
-var serviceWorker = navigator.serviceWorker;
+  var serviceWorker = navigator.serviceWorker;
 
-messaging.requestPermission();
+  messaging.requestPermission();
 
-serviceWorker.register('serviceworker.js').then(() => {
+  serviceWorker.register('serviceworker.js').then(() => {
     return serviceWorker.ready;
-}).then(regist => {
+  }).then(regist => {
     messaging.useServiceWorker(regist);
     messaging.requestPermission().then(() => {
-        messaging.getToken().then(token => {
-            console.log(token);
-            setGlobalToken(token);
-        });
+      messaging.getToken().then(token => {
+        console.log(token);
+        setGlobalToken(token);
+      });
     });
-});
+  });
 </script>
 
 <script>
 document.write(getGlobalToken() + "<BR>");
+console.log(getGlobalToken());
 </script>
 </body>
 </html>
