@@ -24,7 +24,8 @@
       imageCapture.grabFrame()
       .then(imageBitmap => {
         drawCanvas(snapshotCanvas, imageBitmap);
-      });
+      })
+      .catch(error => cosole.log(error));
 
       // Draw the video frame to the canvas.
       //var context = snapshot.getContext('2d');
@@ -41,7 +42,8 @@
       player.srcObject = mediaStream;
       videoTracks = mediaStream.getVideoTracks();
       imageCapture = new ImageCapture(videoTracks);
-    });
+    })
+    .catch(error => cosole.log(error));
 
   function drawCanvas(canvas, img) {
     canvas.width = getComputedStyle(canvas).width.split('px')[0];
