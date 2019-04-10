@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="manifest" href="manifest.json">
+  <title>Push Notification</title>
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script>
+var messaging = firebase.initializeApp({
+  apiKey: "AIzaSyAG18XNPznG4EOvRN5cu88_ZHKPmcLPtCM",
+  authDomain: "pwatest-19462.firebaseapp.com",
+  databaseURL: "https://pwatest-19462.firebaseio.com",
+  projectId: "pwatest-19462",
+  storageBucket: "pwatest-19462.appspot.com",
+  messagingSenderId: "552683654416"
+}).messaging();
+
+var serviceWorker = navigator.serviceWorker;
+
+messaging.requestPermission();
+
+serviceWorker.register('serviceworker.js').then(() => {
+  return serviceWorker.ready;
+}).then(regist => {
+  messaging.useServiceWorker(regist);
+  messaging.requestPermission().then(() => {
+    messaging.getToken().then(token => {
+      document.write("Push通知用Token" + "<BR>");
+      document.write(token+ "<BR>");
+      console.log(token);
+    });
+  });
+});
+</script>
+</body>
+</html>
