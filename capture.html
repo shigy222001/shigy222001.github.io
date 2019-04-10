@@ -20,14 +20,14 @@
   };
 
   captureButton.addEventListener('click', function() {
-    player.style.visibility = "hidden";
+    //player.style.visibility = "hidden";
     var context = snapshot.getContext('2d');
     // Draw the video frame to the canvas.
-    context.drawImage(player, 0, 500, snapshotCanvas.width,
-        snapshotCanvas.height);
+    //context.drawImage(player, 0, 500, snapshotCanvas.width, snapshotCanvas.height);
+    context.drawImage(player, 0, 500);
 
     // Stop all video streams.
-    //videoTracks.forEach(function(track) {track.stop()});
+    videoTracks.forEach(function(track) {track.stop()});
   });
 
   navigator.mediaDevices.getUserMedia({video: true})
