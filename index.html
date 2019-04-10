@@ -6,14 +6,6 @@
   <title>Push Notification</title>
 </head>
 <body>
-  <script>
-  var globalToken = "not set";
-  function setGlobalToken(token) {
-    globalToken = token;
-  }
-  function getGlobalToken() {
-    return (globalToken);
-  }
   </script>
   <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
   <script>
@@ -38,15 +30,9 @@
       messaging.getToken().then(token => {
         document.write(token+ "<BR>");
         console.log(token);
-        globalToken = token;
       });
     });
   });
-</script>
-
-<script>
-document.write(globalToken + "<BR>");
-console.log(globalToken);
 </script>
 </body>
 </html>
