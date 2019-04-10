@@ -5,7 +5,7 @@
 </head>
 <body>
   <div>
-    <button id="capture" style="WIDTH: 500px; HEIGHT: 200px">静止画撮影</button>
+    <button id="capture" style="WIDTH: 250px; HEIGHT: 100px">静止画撮影</button>
   </div>
   <div>
     <video id="player" controls autoplay />
@@ -25,7 +25,7 @@
       .then(imageBitmap => {
         drawCanvas(snapshotCanvas, imageBitmap);
       })
-      .catch(error => cosole.log(error));
+      .catch(error => console.log(error));
 
       // Draw the video frame to the canvas.
       //var context = snapshot.getContext('2d');
@@ -43,7 +43,7 @@
       videoTracks = mediaStream.getVideoTracks();
       imageCapture = new ImageCapture(videoTracks);
     })
-    .catch(error => cosole.log(error));
+    .catch(error => console.log(error));
 
   function drawCanvas(canvas, img) {
     canvas.width = getComputedStyle(canvas).width.split('px')[0];
