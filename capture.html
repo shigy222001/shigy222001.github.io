@@ -5,26 +5,35 @@
 </head>
 <body>
 <button id="capture">Capture</button>
-<video id="player" controls autoplay />
 <canvas id="snapshot" width="320" height="240" />
+<video id="player" controls autoplay />
 <script>
   var player = document.getElementById('player');
   var snapshotCanvas = document.getElementById('snapshot');
   var captureButton = document.getElementById('capture');
   var videoTracks;
+//  var imageCapture;
 
   var handleSuccess = function(stream) {
     // Attach the video stream to the video element and autoplay.
     player.srcObject = stream;
     videoTracks = stream.getVideoTracks();
+//    imageCapture = newImageCapture(videoTracks);
   };
 
   captureButton.addEventListener('click', function() {
+//    imageCapture.takePhoto()
+//    .then(blob => createImageBitmap(blob))
+//    .then(imageBitmap => {
+//    const canvas = document.querySelector('#takePhotoCanvas');
+//      drawCanvas(snapshotCanvas, imageBitmap);
+//    })
+//    .catch(error => ChromeSamples.log(error));
     //player.style.visibility = "hidden";
     var context = snapshot.getContext('2d');
     // Draw the video frame to the canvas.
-    //context.drawImage(player, 0, 500, snapshotCanvas.width, snapshotCanvas.height);
-    context.drawImage(player, 0, 500);
+    context.drawImage(player, 0, 500, snapshotCanvas.width, snapshotCanvas.height);
+    //context.drawImage(player, 0, 500);
 
     // Stop all video streams.
     videoTracks.forEach(function(track) {track.stop()});
