@@ -24,8 +24,7 @@
       imageCapture.grabFrame()
       .then(imageBitmap => {
         drawCanvas(snapshotCanvas, imageBitmap);
-      })
-      .catch(error => ChromeSamples.log(error));
+      });
 
       // Draw the video frame to the canvas.
       //var context = snapshot.getContext('2d');
