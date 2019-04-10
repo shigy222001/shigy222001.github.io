@@ -21,10 +21,6 @@
     var imageCapture;
 
     var handleSuccess = function(stream) {
-      // Attach the video stream to the video element and autoplay.
-      player.srcObject = stream;
-      videoTracks = stream.getVideoTracks();
-      imageCapture = new ImageCapture(videoTracks);
     };
 
     captureButton.addEventListener('click', function() {
@@ -44,7 +40,14 @@
     });
 
     navigator.mediaDevices.getUserMedia({video: true})
-    .then(handleSuccess);
+    .then(mediaStream => {
+      // Attach the video stream to the video element and autoplay.
+      player.srcObject = mediaStream;
+      videoTracks = mediaStream.getVideoTracks();
+      imageCapture = new ImageCapture(videoTracks);
+    })
+    .catch(error => ChromeSamples.log(error));
+  }
 
     function drawCanvas(canvas, img) {
       canvas.width = getComputedStyle(canvas).width.split('px')[0];
