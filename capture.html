@@ -24,7 +24,7 @@
       // Attach the video stream to the video element and autoplay.
       player.srcObject = stream;
       videoTracks = stream.getVideoTracks();
-      imageCapture = newImageCapture(videoTracks);
+      imageCapture = new ImageCapture(videoTracks);
     };
 
     captureButton.addEventListener('click', function() {
