@@ -9,7 +9,9 @@ self.addEventListener('push', event => {
         self.registration.showNotification(json.notification.title, {
             'body': json.notification.body,
             'tag': 'request',
-            'actions': JSON.parse(json.data.action)
+//            'actions': JSON.parse(json.data.action)
+            'actions': [{"action": "select-a","title": "はい"},
+              {"action": "select-b","title": "いいえ"}]
         })
     );
 });
