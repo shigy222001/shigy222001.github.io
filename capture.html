@@ -5,7 +5,7 @@
 </head>
 <body>
   <div>
-    <button id="capture" style="WIDTH: 250px; HEIGHT: 100px">静止画撮影</button>
+    <button id="capture" style="WIDTH: 200px; HEIGHT: 50px">静止画撮影</button>
   </div>
   <div>
     <canvas id="snapshot" width="320" height="240" />
@@ -14,7 +14,7 @@
     <video id="player" controls autoplay />
   </div>
   <div>
-    <button id="stop" style="WIDTH: 250px; HEIGHT: 100px">ビデオ停止</button>
+    <button id="stop" style="WIDTH: 200px; HEIGHT: 50px">ビデオ停止</button>
   </div>
   <script>
     var player = document.getElementById('player');
@@ -41,7 +41,7 @@
       videoTracks.forEach(function(track) {track.stop()});
     });
 
-    captureButton.addEventListener('click', function() {
+    stopButton.addEventListener('click', function() {
       // Stop all video streams.
       videoTracks.forEach(function(track) {track.stop()});
     });
