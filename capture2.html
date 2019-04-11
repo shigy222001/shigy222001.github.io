@@ -14,12 +14,49 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<html lang="ja">
+<html lang="en">
   <head>
-    <title>静止画撮影</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Sample illustrating the use of Image Capture / Grab Frame - Take Photo.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Image Capture / Grab Frame - Take Photo Sample</title>
+    <script>
+      // Add a global error event listener early on in the page load, to help ensure that browsers
+      // which don't support specific functionality still end up displaying a meaningful message.
+      window.addEventListener('error', function(error) {
+        if (ChromeSamples && ChromeSamples.setStatus) {
+          console.error(error);
+          ChromeSamples.setStatus(error.message + ' (Your browser may not support this feature.)');
+          error.preventDefault();
+        }
+      });
+    </script>
+
+
+
+
+    <link rel="icon" href="../images/favicon.ico">
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="grab-frame-take-photo.css">
+
   </head>
 
   <body>
+
+    <h1>Image Capture / Grab Frame - Take Photo Sample</h1>
+    <p class="availability">
+      Available in <a target="_blank" href="https://www.chromestatus.com/feature/4843864737185792">Chrome 56+</a> |
+      <a target="_blank" href="https://github.com/googlechrome/samples/blob/gh-pages/image-capture/grab-frame-take-photo.html">View on GitHub</a> |
+      <a  href="index.html">Browse Samples</a>
+    </p>
+    <h3>Background</h3>
+<p>The ImageCapture Web API allows web developers to capture images from camera
+in the form of a Blob with <code>takePhoto()</code> or as a ImageBitmap with
+<code>grabFrame()</code>.</p>
+
 <div id='results'>
   <div>
     <video autoplay></video>

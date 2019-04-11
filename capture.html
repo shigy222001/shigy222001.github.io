@@ -7,8 +7,12 @@
   <div>
     <button id="capture" style="WIDTH: 250px; HEIGHT: 100px">静止画撮影</button>
   </div>
-  <canvas id="snapshot" width="320" height="240" />
-  <video id="player" controls autoplay />
+  <div>
+    <canvas id="snapshot" width="320" height="240" />
+  </div>
+  <div>
+    <video id="player" controls autoplay />
+  </div>
   <script>
     var player = document.getElementById('player');
     var snapshotCanvas = document.getElementById('snapshot');
