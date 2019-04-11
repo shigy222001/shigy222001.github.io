@@ -36,9 +36,6 @@
       //var context = snapshot.getContext('2d');
       //context.drawImage(player, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
       //context.drawImage(player, 0, 500);
-
-      // Stop all video streams.
-      videoTracks.forEach(function(track) {track.stop()});
     });
 
     stopButton.addEventListener('click', function() {
@@ -51,7 +48,7 @@
       // Attach the video stream to the video element and autoplay.
       player.srcObject = mediaStream;
       videoTracks = mediaStream.getVideoTracks();
-      imageCapture = new ImageCapture(videoTracks);
+      imageCapture = new ImageCapture(mediaStream.getVideoTracks()[0]);
     })
     .catch(error => console.log(error));
 
