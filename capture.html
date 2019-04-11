@@ -13,14 +13,19 @@
   <div>
     <video id="player" controls autoplay />
   </div>
+  <div>
+    <button id="stop" style="WIDTH: 250px; HEIGHT: 100px">ビデオ停止</button>
+  </div>
   <script>
     var player = document.getElementById('player');
     var snapshotCanvas = document.getElementById('snapshot');
     var captureButton = document.getElementById('capture');
+    var stopButton = document.getElementById('stop');
     var videoTracks;
     var imageCapture;
 
     captureButton.addEventListener('click', function() {
+
       imageCapture.grabFrame()
       .then(imageBitmap => {
         drawCanvas(snapshotCanvas, imageBitmap);
@@ -32,6 +37,11 @@
       //context.drawImage(player, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
       //context.drawImage(player, 0, 500);
 
+      // Stop all video streams.
+      videoTracks.forEach(function(track) {track.stop()});
+    });
+
+    captureButton.addEventListener('click', function() {
       // Stop all video streams.
       videoTracks.forEach(function(track) {track.stop()});
     });
