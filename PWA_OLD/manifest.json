@@ -1,6 +1,7 @@
 {
   "name": "PWA Sample",
   "short_name": "PWA",
+  "background_color": "#fc980c",
   "icons": [{
       "src": "./icon-256.png",
       "sizes": "256x256",
@@ -10,6 +11,7 @@
       "sizes": "192x192",
       "type": "image/png"
     }],
-  "start_url": "/index.html",
-  "display": "fullscreen"
+  "start_url": "./?utm_source=homescreen",
+  "display": "standalone",
+  "gcm_sender_id": "103953800507"
 }

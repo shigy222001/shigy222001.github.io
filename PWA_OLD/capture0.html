@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <title>静止画撮影</title>
+</head>
+<body>
+  <div>
+    <button id="capture" style="WIDTH: 200px; HEIGHT: 50px">静止画撮影</button>
+  </div>
+  <div>
+    <canvas id="snapshot" width="320" height="240" />
+  </div>
+  <div>
+    <video id="player" controls autoplay />
+  </div>
+  <div>
+    <button id="stop" style="WIDTH: 200px; HEIGHT: 50px">ビデオ停止</button>
+  </div>
+  <script>
+    var player = document.getElementById('player');
+    var snapshotCanvas = document.getElementById('snapshot');
+    var captureButton = document.getElementById('capture');
+    var stopButton = document.getElementById('stop');
+    var videoTracks;
+    var imageCapture;
+
+    captureButton.addEventListener('click', function() {
+
+      imageCapture.grabFrame()
+      .then(imageBitmap => {
+        drawCanvas(snapshotCanvas, imageBitmap);
+      })
+      .catch(error => console.log(error));
+
+      // Draw the video frame to the canvas.
+      //var context = snapshot.getContext('2d');
+      //context.drawImage(player, 0, 0, snapshotCanvas.width, snapshotCanvas.height);
+      //context.drawImage(player, 0, 500);
+    });
+
+    stopButton.addEventListener('click', function() {
+      // Stop all video streams.
+      videoTracks.forEach(function(track) {track.stop()});
+    });
+
+    navigator.mediaDevices.getUserMedia({video: true})
+    .then(mediaStream => {
+      // Attach the video stream to the video element and autoplay.
+      player.srcObject = mediaStream;
+      videoTracks = mediaStream.getVideoTracks();
+      imageCapture = new ImageCapture(mediaStream.getVideoTracks()[0]);
+    })
+    .catch(error => console.log(error));
+
+    function drawCanvas(canvas, img) {
+      canvas.width = getComputedStyle(canvas).width.split('px')[0];
+      canvas.height = getComputedStyle(canvas).height.split('px')[0];
+      let ratio  = Math.min(canvas.width / img.width, canvas.height / img.height);
+      let x = (canvas.width - img.width * ratio) / 2;
+      let y = (canvas.height - img.height * ratio) / 2;
+      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+      canvas.getContext('2d').drawImage(img, 0, 0, img.width, img.height,
+      x, y, img.width * ratio, img.height * ratio);
+    }
+  </script>
+</body>
+</html>
